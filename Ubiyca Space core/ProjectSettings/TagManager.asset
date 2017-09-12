@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Ground
   - Pick Up
+  - 123
   layers:
   - Default
   - TransparentFX

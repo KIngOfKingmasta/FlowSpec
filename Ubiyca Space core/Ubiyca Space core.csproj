@@ -86,8 +86,10 @@
   <ItemGroup>
     <Compile Include="Assets\2DPlatformer\Scripts\DeadzoneCamera.cs" />
     <Compile Include="Assets\2DPlatformer\Scripts\PerfectPixel.cs" />
+    <Compile Include="Assets\CameraController.cs" />
     <Compile Include="Assets\DashaController.cs" />
     <Compile Include="Assets\Podnimu_Korobku.cs" />
+    <Compile Include="Assets\Prines_resurs.cs" />
     <Compile Include="Assets\TextNaKorobke.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

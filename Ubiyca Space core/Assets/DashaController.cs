@@ -97,6 +97,7 @@ public class DashaController : MonoBehaviour {
 //				collision.rigidbody.GetComponent<Collider2D>().enabled = false;
 				collision.rigidbody.GetComponent<Collider2D>().isTrigger = true;
 				collision.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+				collision.gameObject.tag = ("123");
 				Free_hand = false;
 				PickUp_rdy = false;
 			}
