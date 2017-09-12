@@ -15,6 +15,9 @@ public class DashaController : MonoBehaviour {
 	public bool Free_hand = true;
 	public bool PickUp_rdy;
 
+	public Transform PickUp;
+
+
 
 	void Awake()
 	{
@@ -25,14 +28,14 @@ public class DashaController : MonoBehaviour {
 
 	private void Start()
 	{
-	PickUp_rdy = false;
-    }
+		PickUp_rdy = false;
+	}
 
-	void Update ()
+	void Update()
 	{
 
 		float moveHorizontal = Input.GetAxis("Horizontal");
-		
+
 		Vector2 movement = new Vector2(moveHorizontal, 0.0f);
 		rb.velocity = movement * speed;
 
@@ -42,7 +45,7 @@ public class DashaController : MonoBehaviour {
 		}
 		else
 		{
-			animator.Play ("Player_JumpHold");
+			animator.Play("Player_JumpHold");
 		}
 		if (Input.GetKeyDown("space") && Grounded == true)
 		{
@@ -54,45 +57,83 @@ public class DashaController : MonoBehaviour {
 		else if (moveHorizontal < 0 && isFacingRight)
 			Flip();
 
-		if (Input.GetKeyDown(KeyCode.E) && PickUp_rdy == true)
-		{
-			PickUP_object();
-			animator.SetTrigger("use");
-		}
-		else if (Input.GetKeyDown(KeyCode.E)) 
+		if (Input.GetKeyDown(KeyCode.E) && Free_hand == true)
 		{
 			animator.SetTrigger("use");
 		}
+
 	}
 	private void FixedUpdate()
 	{
 
 	}
 
-	void OnTriggerEnter2D (Collider2D other)
+	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.gameObject.CompareTag("Ground"))
+		if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag ("Pick Up") && Free_hand == true)
 		{
 			Debug.Log("collide with " + other.gameObject.name);
 			Grounded = true;
 		}
-		else if (other.gameObject.CompareTag("Pick Up") && PickUp_rdy == false)
-		{
-			Debug.Log("collide with " + other.gameObject.name);
+	}
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (collision.gameObject.CompareTag("Pick Up"))
 			PickUp_rdy = true;
+			Debug.Log("Столкнулся с  " + collision.gameObject.name);		
+	}
+
+	private void OnCollisionStay2D(Collision2D collision)
+	{
+		if (collision.gameObject.CompareTag("Pick Up"))
+		{
+			if ((Input.GetKeyDown(KeyCode.E)) && Free_hand == true && PickUp_rdy == true)
+			{
+				Debug.Log("Беру Ящик " + collision.gameObject.name);
+				animator.SetTrigger("use");
+				collision.gameObject.transform.position = PickUp.transform.position;
+				collision.gameObject.transform.parent = gameObject.transform;
+				collision.rigidbody.isKinematic = true;
+//				collision.rigidbody.GetComponent<Collider2D>().enabled = false;
+				collision.rigidbody.GetComponent<Collider2D>().isTrigger = true;
+				collision.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+				Free_hand = false;
+				PickUp_rdy = false;
+			}
 		}
 	}
 
+	private void OnTriggerStay2D(Collider2D other)
+	{
+		if (other.gameObject.CompareTag ("Pick Up"))
+		{
+			if ((Input.GetKeyDown(KeyCode.Q)) && Free_hand == false)
+			{
+				other.gameObject.transform.parent = null;
+				other.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
+				other.gameObject.GetComponent<Collider2D>().isTrigger = false;
+				other.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
+				Free_hand = true;
+
+			}
+		}
+	}
+
+	private void OnCollisionExit2D(Collision2D other)
+	{ 
+	  if (other.gameObject.CompareTag("Pick Up") && PickUp_rdy == true)
+		{
+			PickUp_rdy = false;
+		}
+	}
+
+
 	private void OnTriggerExit2D(Collider2D other)
 	{
-		if (other.gameObject.CompareTag("Ground"))
+		if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Pick Up"))
 		{
 			Debug.Log("collide with " + other.gameObject.name);
 			Grounded = false;
-		}
-		else if (other.gameObject.CompareTag("Pick Up") && PickUp_rdy == true)
-		{
-			PickUp_rdy = false;
 		}
 	}
 
@@ -105,8 +146,4 @@ public class DashaController : MonoBehaviour {
 		transform.localScale = theScale;
 	}
 
-	private void PickUP_object()
-	{
-
-	}
 }
