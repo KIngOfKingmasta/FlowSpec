@@ -87,6 +87,7 @@
     <Compile Include="Assets\2DPlatformer\Scripts\DeadzoneCamera.cs" />
     <Compile Include="Assets\2DPlatformer\Scripts\PerfectPixel.cs" />
     <Compile Include="Assets\CameraController.cs" />
+    <Compile Include="Assets\Conveer.cs" />
     <Compile Include="Assets\DashaController.cs" />
     <Compile Include="Assets\Nakladnaya.cs" />
     <Compile Include="Assets\Podnimu_Korobku.cs" />

@@ -5,10 +5,12 @@ using UnityEngine;
 public class Prines_resurs : MonoBehaviour {
 
 	private Nakladnaya nak;
+	private Conveer zavod;
 
 	private void Awake()
 	{
 		nak = GetComponent<Nakladnaya>();
+		zavod = GetComponent<Conveer>();
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
@@ -20,6 +22,8 @@ public class Prines_resurs : MonoBehaviour {
 			nak.count++;
 			nak.UpdateNakladnya();
 			Debug.Log(nak.count);
+
+			zavod.novaya_korobka();
 		}
 	}
 
@@ -32,7 +36,8 @@ public class Prines_resurs : MonoBehaviour {
 			nak.count++;
 			nak.UpdateNakladnya();
 			Debug.Log(nak.count);
-			
+			zavod.novaya_korobka();
+
 		}
 
 	}
