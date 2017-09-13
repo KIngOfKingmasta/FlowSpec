@@ -97,7 +97,7 @@ public class DashaController : MonoBehaviour {
 //				collision.rigidbody.GetComponent<Collider2D>().enabled = false;
 				collision.rigidbody.GetComponent<Collider2D>().isTrigger = true;
 				collision.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-				collision.gameObject.tag = ("123");
+				collision.gameObject.tag = ("Picked");
 				Free_hand = false;
 				PickUp_rdy = false;
 			}
@@ -106,7 +106,7 @@ public class DashaController : MonoBehaviour {
 
 	private void OnTriggerStay2D(Collider2D other)
 	{
-		if (other.gameObject.CompareTag ("Pick Up"))
+		if (other.gameObject.CompareTag ("Picked"))
 		{
 			if ((Input.GetKeyDown(KeyCode.Q)) && Free_hand == false)
 			{
@@ -114,6 +114,7 @@ public class DashaController : MonoBehaviour {
 				other.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
 				other.gameObject.GetComponent<Collider2D>().isTrigger = false;
 				other.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
+				other.gameObject.tag = ("Pick Up");
 				Free_hand = true;
 
 			}
