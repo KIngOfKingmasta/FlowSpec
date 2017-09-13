@@ -72,7 +72,7 @@ public class DashaController : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag ("Pick Up") && Free_hand == true)
 		{
-			Debug.Log("collide with " + other.gameObject.name);
+//			Debug.Log("collide with " + other.gameObject.name);
 			Grounded = true;
 		}
 	}
@@ -80,7 +80,7 @@ public class DashaController : MonoBehaviour {
 	{
 		if (collision.gameObject.CompareTag("Pick Up"))
 			PickUp_rdy = true;
-			Debug.Log("Столкнулся с  " + collision.gameObject.name);		
+//			Debug.Log("Столкнулся с  " + collision.gameObject.name);		
 	}
 
 	private void OnCollisionStay2D(Collision2D collision)
@@ -89,7 +89,7 @@ public class DashaController : MonoBehaviour {
 		{
 			if ((Input.GetKeyDown(KeyCode.E)) && Free_hand == true && PickUp_rdy == true)
 			{
-				Debug.Log("Беру Ящик " + collision.gameObject.name);
+	//			Debug.Log("Беру Ящик " + collision.gameObject.name);
 				animator.SetTrigger("use");
 				collision.gameObject.transform.position = PickUp.transform.position;
 				collision.gameObject.transform.parent = gameObject.transform;
@@ -137,7 +137,7 @@ public class DashaController : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Pick Up"))
 		{
-			Debug.Log("collide with " + other.gameObject.name);
+//			Debug.Log("collide with " + other.gameObject.name);
 			Grounded = false;
 		}
 	}

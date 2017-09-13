@@ -5,12 +5,14 @@ using UnityEngine;
 public class Prines_resurs : MonoBehaviour {
 
 	private Nakladnaya nak;
-	private Conveer zavod;
+	private Prorab prorab;
+	public GameObject Korobka;
+	public Transform Zavod;
 
 	private void Awake()
 	{
-		nak = GetComponent<Nakladnaya>();
-		zavod = GetComponent<Conveer>();
+	    nak = GetComponent<Nakladnaya>();
+		prorab = GetComponent<Prorab>();
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
@@ -18,12 +20,12 @@ public class Prines_resurs : MonoBehaviour {
 		if (other.gameObject.CompareTag("Pick Up"))
 		{
 			Destroy(other.gameObject);
-			Debug.Log("Столкнулся с " + other.gameObject.name);
+//			Debug.Log("Столкнулся с " + other.gameObject.name);
 			nak.count++;
 			nak.UpdateNakladnya();
-			Debug.Log(nak.count);
-
-			zavod.novaya_korobka();
+//			Debug.Log(nak.count);
+			NovayaKorobka();
+			prorab.DobavilStroyMaterial();
 		}
 	}
 
@@ -32,14 +34,18 @@ public class Prines_resurs : MonoBehaviour {
 		if (other.gameObject.CompareTag("Pick Up"))
 		{
 			Destroy(other.gameObject);
-			Debug.Log("Столкнулся с " + other.gameObject.name);
+//			Debug.Log("Столкнулся с " + other.gameObject.name);
 			nak.count++;
 			nak.UpdateNakladnya();
-			Debug.Log(nak.count);
-			zavod.novaya_korobka();
-
+//			Debug.Log(nak.count);
+			NovayaKorobka();
+			prorab.DobavilStroyMaterial();
 		}
 
 	}
 
+	private void NovayaKorobka()
+	{
+		Instantiate(Korobka, Zavod.transform.position, Zavod.transform.rotation);
+	}
 }

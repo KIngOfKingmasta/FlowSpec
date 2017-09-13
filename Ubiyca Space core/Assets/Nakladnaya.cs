@@ -10,7 +10,6 @@ public class Nakladnaya : MonoBehaviour {
 	public static Nakladnaya nakladnaya;
 
 
-
 	private void Start()
 	{
 		count = 0;
@@ -28,7 +27,5 @@ public class Nakladnaya : MonoBehaviour {
 	{
 		Podpis.text = "Коробок на складе: " + count;
 	}
-
-
 
 }

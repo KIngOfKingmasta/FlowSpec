@@ -510,7 +510,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc15592e9d716c742919e37f19d8e59d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Korobka: {fileID: 1162549069642536, guid: d88601ed924a3c441b698468fb12c086, type: 2}
 --- !u!1 &582157127
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,6 +522,7 @@ GameObject:
   - component: {fileID: 582157129}
   - component: {fileID: 582157128}
   - component: {fileID: 582157132}
+  - component: {fileID: 582157133}
   m_Layer: 0
   m_Name: Sklad
   m_TagString: Respawn
@@ -541,6 +541,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0393020bda4644b4dbe840518ae0485d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Korobka: {fileID: 1162549069642536, guid: d88601ed924a3c441b698468fb12c086, type: 2}
+  Zavod: {fileID: 360292116}
 --- !u!61 &582157129
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -635,7 +637,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Podpis: {fileID: 1081715228}
   count: 0
-  test: {fileID: 1162549069642536, guid: d88601ed924a3c441b698468fb12c086, type: 2}
+--- !u!114 &582157133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 582157127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9925fbcbee36d3f4198a1fb1c98f136b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StroyMaterial: 0
 --- !u!1001 &1033211077
 Prefab:
   m_ObjectHideFlags: 0
