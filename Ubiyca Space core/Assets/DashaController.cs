@@ -94,7 +94,6 @@ public class DashaController : MonoBehaviour {
 				collision.gameObject.transform.position = PickUp.transform.position;
 				collision.gameObject.transform.parent = gameObject.transform;
 				collision.rigidbody.isKinematic = true;
-//				collision.rigidbody.GetComponent<Collider2D>().enabled = false;
 				collision.rigidbody.GetComponent<Collider2D>().isTrigger = true;
 				collision.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
 				collision.gameObject.tag = ("Picked");
@@ -116,6 +115,10 @@ public class DashaController : MonoBehaviour {
 				other.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionX;
 				other.gameObject.tag = ("Pick Up");
 				Free_hand = true;
+				if (Grounded == false)
+				{
+					Grounded = true;
+				}
 
 			}
 		}
