@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212451740521142662}
   - component: {fileID: 61270289313379344}
   - component: {fileID: 50171167608935920}
+  - component: {fileID: 114696658802832184}
   m_Layer: 0
   m_Name: Korobka
   m_TagString: Pick Up
@@ -87,6 +88,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.7}
   m_EdgeRadius: 0
+--- !u!114 &114696658802832184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1162549069642536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd128f3a9bd49b468ef617ded6a80bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212451740521142662
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -118,7 +130,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -888973317
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300006, guid: 545e3f6ad65c48d40a96534d4c3ecd84, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

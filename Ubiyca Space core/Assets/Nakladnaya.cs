@@ -17,11 +17,7 @@ public class Nakladnaya : MonoBehaviour {
 	}
 
 
-	public void AddCount(int NewCount)
-	{
-		count += NewCount;
-		UpdateNakladnya();
-	}
+
 
 	public void UpdateNakladnya()
 	{

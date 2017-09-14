@@ -17,10 +17,6 @@ public class Prorab : MonoBehaviour {
 	{
 		StroyMaterial = nakl.count;
 		Debug.Log("Стройматериала на складе: " + nakl.count);
-		if (StroyMaterial >= 5)
-		{
-			Destroy(gameObject);
-		}
 	}
 
 
