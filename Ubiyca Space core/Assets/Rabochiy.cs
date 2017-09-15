@@ -8,10 +8,11 @@ public class Rabochiy : MonoBehaviour {
 	public Transform Korobka;
 	public Transform PickedUp;
 	public bool FreeHand = true;
-
+	public float maxRaydistance;
 
 	private void Update()
 	{
+		Poisk_korobki();
 
 		if (FreeHand == true && Korobka != null)
 		{
@@ -44,5 +45,21 @@ public class Rabochiy : MonoBehaviour {
 		}
 	}
 
+	void Poisk_korobki()
+	{
+		Ray2D rayRight = new Ray2D(PickedUp.position, Vector2.right);
+		Ray2D rayLeft = new Ray2D(PickedUp.position, Vector2.left);
+		RaycastHit2D[] hits = Physics2D.RaycastAll(PickedUp.position, Vector2.right);
+		Debug.DrawRay(PickedUp.position, Vector2.right);
+		foreach (RaycastHit2D hit in hits)
+		{
+			if (hit.collider.gameObject.tag == "Pick Up")
+			{
+//				float distans = Mathf.Abs(transform.position.x-hit.distance);
+//				Debug.Log("Расстояние до :" + hit.collider.name + distans);
+				Destroy(hit.collider.gameObject);
+			}
+		}
+	}
 
 }
