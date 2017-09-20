@@ -29,8 +29,9 @@ public class Rabochiy : MonoBehaviour {
 			Debug.Log("Ищу коробку");
 			Poisk_korobki();
 		}
-		if (FreeHand == true && Korobki.Count >= 0)
+		if (FreeHand == true && Korobki.Count > 0)
 		{
+
 			for (int i = 0; Korobki[i]  ; i++)
 			{
 				transform.position = Vector2.MoveTowards(transform.position, Korobki[i].transform.position, Time.deltaTime);
@@ -40,9 +41,12 @@ public class Rabochiy : MonoBehaviour {
 					Debug.Log("Иду вправо");
 					Flip();
 				}
-				
+
 				if (Korobki[i] != null)
-				{ break; }
+				{
+					break;
+				}
+
 			}
 		
 		}
@@ -77,7 +81,7 @@ public class Rabochiy : MonoBehaviour {
 		{
 			FreeHand = true;
 			Korobki.Remove(other.gameObject);
-			Debug.Log(Korobki.Count);
+			Debug.Log("Осталось принести коробок :" + Korobki.Count);
 			if (Korobki.Count <= 0)
 			{
 				naIIIelKorobku = false;
