@@ -8,7 +8,7 @@ public class DashaController : MonoBehaviour {
 	private Animator animator;
 
 	public bool Grounded = false;
-	private int speed = 10;
+	private float speed = 10;
 	private Rigidbody2D rb;
 	private float Jump = 50f;
 	private bool isFacingRight = true;
