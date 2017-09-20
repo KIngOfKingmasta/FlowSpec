@@ -13,23 +13,25 @@ public class Rabochiy : MonoBehaviour {
 	private bool isFacingRight = true;
 	List<GameObject> Korobki = new List<GameObject>();
 	public bool naIIIelKorobku = false;
+	private Upravlenie_predpriyatiem na4alnik;
 	
 
 
 	private void Awake()
 	{
 		AnimRab = GetComponent<Animator>();
+		na4alnik = GetComponentInParent<Upravlenie_predpriyatiem>();
 	}
 
 	private void Update()
 	{
 
-		if (naIIIelKorobku == false && Korobki.Count <= 0)
+		if (naIIIelKorobku == false && Korobki.Count <= 0 && na4alnik.NujnoBolIIIeKorobok == true)
 		{
 			Debug.Log("Ищу коробку");
 			Poisk_korobki();
 		}
-		if (FreeHand == true && Korobki.Count > 0)
+		if (FreeHand == true && Korobki.Count > 0 && na4alnik.NujnoBolIIIeKorobok == true)
 		{
 
 			for (int i = 0; Korobki[i]  ; i++)
@@ -39,6 +41,11 @@ public class Rabochiy : MonoBehaviour {
 				if (Korobki[i].transform.position.x > transform.position.x && isFacingRight == false)
 				{
 					Debug.Log("Иду вправо");
+					Flip();
+				}
+				else if (Korobki[i].transform.position.x < transform.position.x && isFacingRight == true)
+				{
+					Debug.Log("Иду влево");
 					Flip();
 				}
 
@@ -54,6 +61,11 @@ public class Rabochiy : MonoBehaviour {
 		{
 			transform.position = Vector2.MoveTowards(transform.position, GpsBase.position, Time.deltaTime);
 			if (GpsBase.transform.position.x < transform.position.x && isFacingRight == true)
+			{
+				Debug.Log("Иду влево");
+				Flip();
+			}
+			else if (GpsBase.transform.position.x > transform.position.x && isFacingRight == false)
 			{
 				Debug.Log("Иду влево");
 				Flip();
@@ -95,9 +107,11 @@ public class Rabochiy : MonoBehaviour {
 
 	//	Ray2D rayRight = new Ray2D(PickedUp.position, Vector2.right);
 	//	Ray2D rayLeft = new Ray2D(PickedUp.position, Vector2.left);
-		RaycastHit2D[] hits = Physics2D.RaycastAll(PickedUp.position, Vector2.right);
+		RaycastHit2D[] hitsR = Physics2D.RaycastAll(PickedUp.position, Vector2.right);
+		RaycastHit2D[] hitsL = Physics2D.RaycastAll(PickedUp.position, Vector2.left);
+		Debug.DrawRay(PickedUp.position, Vector2.left);
 		Debug.DrawRay(PickedUp.position, Vector2.right);
-		foreach (RaycastHit2D hit in hits)
+		foreach (RaycastHit2D hit in hitsR)
 		{
 			if (hit.collider.gameObject.tag == "Pick Up")
 			{
@@ -108,6 +122,16 @@ public class Rabochiy : MonoBehaviour {
 				//				float distans = Mathf.Abs(transform.position.x-hit.distance);
 				//				Debug.Log("Расстояние до :" + hit.collider.name + distans);
 
+			}
+		}
+		foreach (RaycastHit2D hit in hitsL)
+		{
+			if (hit.collider.gameObject.tag == "Pick Up")
+			{
+				naIIIelKorobku = true;
+				Korobki.Add(hit.collider.gameObject);
+				Debug.Log("Луч попал в : " + hit.collider.gameObject.name);
+				Debug.Log("Всего в масиве " + Korobki.Count);
 			}
 		}
 	}
