@@ -34,26 +34,28 @@ public class Rabochiy : MonoBehaviour {
 		if (FreeHand == true && Korobki.Count > 0 && na4alnik.NujnoBolIIIeKorobok == true)
 		{
 
-			for (int i = 0; Korobki[i]  ; i++)
+			for (int i = 0; Korobki[i]; i++)
 			{
-				transform.position = Vector2.MoveTowards(transform.position, Korobki[i].transform.position, Time.deltaTime);
-
-				if (Korobki[i].transform.position.x > transform.position.x && isFacingRight == false)
+				if (Korobki[i].gameObject.CompareTag("Pick Up"))
 				{
-					Debug.Log("Иду вправо");
-					Flip();
-				}
-				else if (Korobki[i].transform.position.x < transform.position.x && isFacingRight == true)
-				{
-					Debug.Log("Иду влево");
-					Flip();
-				}
+					transform.position = Vector2.MoveTowards(transform.position, Korobki[i].transform.position, Time.deltaTime);
 
-				if (Korobki[i] != null)
-				{
-					break;
-				}
+					if (Korobki[i].transform.position.x > transform.position.x && isFacingRight == false)
+					{
+						Debug.Log("Иду вправо");
+						Flip();
+					}
+					else if (Korobki[i].transform.position.x < transform.position.x && isFacingRight == true)
+					{
+						Debug.Log("Иду влево");
+						Flip();
+					}
 
+					if (Korobki[i] != null)
+					{
+						break;
+					}
+				}
 			}
 		
 		}
