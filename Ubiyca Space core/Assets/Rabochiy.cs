@@ -10,7 +10,7 @@ public class Rabochiy : MonoBehaviour {
 	private Animator AnimRab;
 
 	private bool isFacingRight = true;
-	public List<GameObject> Korobki = new List<GameObject>();
+//	public List<GameObject> Korobki = new List<GameObject>();
 	public bool naIIIelKorobku = false;
 	private Upravlenie_predpriyatiem na4alnik;
 	private ManagerKorobok manager;
@@ -27,35 +27,38 @@ public class Rabochiy : MonoBehaviour {
 	private void Update()
 	{
 
-		if (naIIIelKorobku == false && Korobki.Count <= 0 && na4alnik.NujnoBolIIIeKorobok == true)
+		if (naIIIelKorobku == false && manager.Korobki.Count <= 0 && na4alnik.NujnoBolIIIeKorobok == true)
 		{
 			Debug.Log("Ищу коробку");
 			Poisk_korobki();
 		}
-		if (FreeHand == true && Korobki.Count > 0 && na4alnik.NujnoBolIIIeKorobok == true)
+		if (FreeHand == true && manager.Korobki.Count > 0 && na4alnik.NujnoBolIIIeKorobok == true)
 		{
 
-			for (int i = 0; Korobki[i]; i++)
+			for (int i = 0; manager.Korobki[i]; i++)
 			{
-				if (Korobki[i].gameObject.CompareTag("Pick Up"))
+				if (manager.Korobki[i].gameObject.CompareTag("Pick Up"))
 				{
-					transform.position = Vector2.MoveTowards(transform.position, Korobki[i].transform.position, Time.deltaTime);
+					transform.position = Vector2.MoveTowards(transform.position, manager.Korobki[i].transform.position, Time.deltaTime);
 
-					if (Korobki[i].transform.position.x > transform.position.x && isFacingRight == false)
+
+
+					if (manager.Korobki[i].transform.position.x > transform.position.x && isFacingRight == false)
 					{
 						Debug.Log("Иду вправо");
 						Flip();
 					}
-					else if (Korobki[i].transform.position.x < transform.position.x && isFacingRight == true)
+					else if (manager.Korobki[i].transform.position.x < transform.position.x && isFacingRight == true)
 					{
 						Debug.Log("Иду влево");
 						Flip();
 					}
 
-					if (Korobki[i] != null)
+					if (manager.Korobki[i] != null)
 					{
 						break;
 					}
+
 				}
 			}
 		
@@ -73,6 +76,11 @@ public class Rabochiy : MonoBehaviour {
 				Debug.Log("Иду влево");
 				Flip();
 			}
+		}
+		if (transform.position == null)
+		{
+			Debug.Log("Мою коробку уже спиздили!");
+			transform.position = Vector2.MoveTowards(transform.position, GpsBase.position, Time.deltaTime);
 		}
 	}
 
@@ -95,10 +103,9 @@ public class Rabochiy : MonoBehaviour {
 		if (other.gameObject.CompareTag("Picked"))
 		{
 			FreeHand = true;
-			Korobki.Remove(other.gameObject);
-			manager.Korobki2.Remove(other.gameObject);
-			Debug.Log("Осталось принести коробок :" + Korobki.Count);
-			if (Korobki.Count <= 0)
+			manager.Korobki.Remove(other.gameObject);
+			Debug.Log("Осталось принести коробок :" + manager.Korobki.Count);
+			if (manager.Korobki.Count <= 0)
 			{
 				naIIIelKorobku = false;
 			}
@@ -121,10 +128,7 @@ public class Rabochiy : MonoBehaviour {
 			if (hit.collider.gameObject.tag == "Pick Up")
 			{
 				naIIIelKorobku = true;
-				Korobki.Add(hit.collider.gameObject);
-				manager.Korobki2.Add(hit.collider.gameObject);
-	//			Debug.Log("Луч попал в : " + hit.collider.gameObject.name);
-	//			Debug.Log("Всего в масиве " + Korobki.Count);
+				manager.Korobki.Add(hit.collider.gameObject);
 				//				float distans = Mathf.Abs(transform.position.x-hit.distance);
 				//				Debug.Log("Расстояние до :" + hit.collider.name + distans);
 
@@ -135,10 +139,7 @@ public class Rabochiy : MonoBehaviour {
 			if (hit.collider.gameObject.tag == "Pick Up")
 			{
 				naIIIelKorobku = true;
-				Korobki.Add(hit.collider.gameObject);
-				manager.Korobki2.Add(hit.collider.gameObject);
-	//			Debug.Log("Луч попал в : " + hit.collider.gameObject.name);
-	//			Debug.Log("Всего в масиве " + Korobki.Count);
+				manager.Korobki.Add(hit.collider.gameObject);
 			}
 		}
 	}

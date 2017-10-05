@@ -14,7 +14,7 @@ public class Upravlenie_predpriyatiem : MonoBehaviour {
 
 	private void Awake()
 	{
-		NujnoKorobok= 3;
+		NujnoKorobok= 5;
 		count_na_Base = 0;
 		Korobok_na_base.text = "Коробок на базе: " + count_na_Base;
 	}
