@@ -10,10 +10,11 @@ public class Upravlenie_predpriyatiem : MonoBehaviour {
 	private int count_na_Base;
 	public static Upravlenie_predpriyatiem basa;
 	public bool NujnoBolIIIeKorobok = true;
-	public int NujnoKorobok = 2;
+	public int NujnoKorobok;
 
 	private void Awake()
 	{
+		NujnoKorobok= 3;
 		count_na_Base = 0;
 		Korobok_na_base.text = "Коробок на базе: " + count_na_Base;
 	}

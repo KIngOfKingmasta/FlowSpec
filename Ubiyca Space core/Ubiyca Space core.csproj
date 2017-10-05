@@ -90,6 +90,7 @@
     <Compile Include="Assets\Conveer.cs" />
     <Compile Include="Assets\DashaController.cs" />
     <Compile Include="Assets\GPS_na_Korobke.cs" />
+    <Compile Include="Assets\ManagerKorobok.cs" />
     <Compile Include="Assets\Nakladnaya.cs" />
     <Compile Include="Assets\Podnimu_Korobku.cs" />
     <Compile Include="Assets\Prines_resurs.cs" />

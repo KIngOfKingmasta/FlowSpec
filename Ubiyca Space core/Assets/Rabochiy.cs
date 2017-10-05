@@ -5,15 +5,15 @@ using UnityEngine;
 public class Rabochiy : MonoBehaviour {
 
 	public Transform GpsBase;
-	public Transform Korobka;
 	public Transform PickedUp;
 	public bool FreeHand = true;
 	private Animator AnimRab;
 
 	private bool isFacingRight = true;
-	List<GameObject> Korobki = new List<GameObject>();
+	public List<GameObject> Korobki = new List<GameObject>();
 	public bool naIIIelKorobku = false;
 	private Upravlenie_predpriyatiem na4alnik;
+	private ManagerKorobok manager;
 	
 
 
@@ -21,6 +21,7 @@ public class Rabochiy : MonoBehaviour {
 	{
 		AnimRab = GetComponent<Animator>();
 		na4alnik = GetComponentInParent<Upravlenie_predpriyatiem>();
+		manager = GetComponentInParent<ManagerKorobok>();
 	}
 
 	private void Update()
@@ -95,6 +96,7 @@ public class Rabochiy : MonoBehaviour {
 		{
 			FreeHand = true;
 			Korobki.Remove(other.gameObject);
+			manager.Korobki2.Remove(other.gameObject);
 			Debug.Log("Осталось принести коробок :" + Korobki.Count);
 			if (Korobki.Count <= 0)
 			{
@@ -107,8 +109,9 @@ public class Rabochiy : MonoBehaviour {
 	void Poisk_korobki()
 	{
 
-	//	Ray2D rayRight = new Ray2D(PickedUp.position, Vector2.right);
-	//	Ray2D rayLeft = new Ray2D(PickedUp.position, Vector2.left);
+		//	Ray2D rayRight = new Ray2D(PickedUp.position, Vector2.right);
+		//	Ray2D rayLeft = new Ray2D(PickedUp.position, Vector2.left);
+		Debug.Log("Нужно принести коробок на базу: " + na4alnik.NujnoKorobok);
 		RaycastHit2D[] hitsR = Physics2D.RaycastAll(PickedUp.position, Vector2.right);
 		RaycastHit2D[] hitsL = Physics2D.RaycastAll(PickedUp.position, Vector2.left);
 		Debug.DrawRay(PickedUp.position, Vector2.left);
@@ -119,8 +122,9 @@ public class Rabochiy : MonoBehaviour {
 			{
 				naIIIelKorobku = true;
 				Korobki.Add(hit.collider.gameObject);
-				Debug.Log("Луч попал в : " + hit.collider.gameObject.name);
-				Debug.Log("Всего в масиве " + Korobki.Count);
+				manager.Korobki2.Add(hit.collider.gameObject);
+	//			Debug.Log("Луч попал в : " + hit.collider.gameObject.name);
+	//			Debug.Log("Всего в масиве " + Korobki.Count);
 				//				float distans = Mathf.Abs(transform.position.x-hit.distance);
 				//				Debug.Log("Расстояние до :" + hit.collider.name + distans);
 
@@ -132,8 +136,9 @@ public class Rabochiy : MonoBehaviour {
 			{
 				naIIIelKorobku = true;
 				Korobki.Add(hit.collider.gameObject);
-				Debug.Log("Луч попал в : " + hit.collider.gameObject.name);
-				Debug.Log("Всего в масиве " + Korobki.Count);
+				manager.Korobki2.Add(hit.collider.gameObject);
+	//			Debug.Log("Луч попал в : " + hit.collider.gameObject.name);
+	//			Debug.Log("Всего в масиве " + Korobki.Count);
 			}
 		}
 	}
